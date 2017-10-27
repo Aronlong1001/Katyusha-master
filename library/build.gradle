@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion Integer.parseInt(compile_version)
+    buildToolsVersion build_version
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(min_version)
+        targetSdkVersion Integer.parseInt(target_version)
+        versionCode Integer.parseInt(version_code)
+        versionName version_name
+
+        javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [ moduleName : project.getName() ]
+                }
+        }
+    }
+    buildTypes {
+        release {
+            buildConfigField("boolean","LOG","false")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField("boolean", "LOG", "true")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.android.support:appcompat-v7:${lib_support}"
+    compile "com.android.support:recyclerview-v7:${lib_support}"
+    compile 'com.huxq17.xrefreshview:xrefreshview:3.6.9'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.facebook.fresco:fresco:1.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile 'io.reactivex:rxjava:1.1.5'
+    compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'com.github.zhaokaiqiang.klog:library:1.4.0'
+    compile 'pub.devrel:easypermissions:1.0.1'
+    testCompile 'junit:junit:4.2'
+    compile 'com.aliyun.ams:alicloud-android-hotfix:3.0.5'
+
+    compile 'com.alibaba:arouter-api:1.2.4'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+
+    compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
+}

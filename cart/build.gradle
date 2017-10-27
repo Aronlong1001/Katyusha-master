@@ -1,0 +1,48 @@
+def packageName = "com.katyusha.aron.cart"
+
+def isDev = IS_DEV_TAG.toBoolean()
+
+if (isDev){
+    apply plugin: 'com.android.application'
+}else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion Integer.parseInt(compile_version)
+    buildToolsVersion build_version
+
+    defaultConfig {
+        if (isDev){
+            applicationId packageName
+        }
+        minSdkVersion Integer.parseInt(min_version)
+        targetSdkVersion Integer.parseInt(target_version)
+        versionCode Integer.parseInt(version_code)
+        versionName version_name
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding{
+        enabled true
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    testCompile 'junit:junit:4.12'
+    compile project(':library')
+}

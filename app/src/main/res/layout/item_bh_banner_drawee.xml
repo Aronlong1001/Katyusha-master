@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    >
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/bl_banner_draweeview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        fresco:actualImageScaleType="fitCenter"
+        fresco:placeholderImageScaleType="centerInside"
+        fresco:placeholderImage="@mipmap/place_holder"
+        >
+    </com.facebook.drawee.view.SimpleDraweeView>
+</layout>

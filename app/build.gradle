@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion Integer.parseInt(compile_version)
+    buildToolsVersion build_version
+    defaultConfig {
+        applicationId "com.katyusha.aron.demo"
+        minSdkVersion Integer.parseInt(min_version)
+        targetSdkVersion Integer.parseInt(target_version)
+        versionCode Integer.parseInt(version_code)
+        versionName version_name
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+
+    }
+    signingConfigs {//签名配置
+        release {//发布版签名配置
+            storeFile file("bailian.keystore")//密钥文件路径
+            storePassword "bailian"//密钥文件密码
+            keyAlias "bailian"//key别名
+            keyPassword "bailian"//key密码
+        }
+        debug {//debug版签名配置
+            storeFile file("debug.keystore")//密钥文件路径
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+        }
+    }
+    buildTypes {
+        release {
+            buildConfigField("boolean","LOG","false")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            buildConfigField("boolean","LOG","true")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support:support-v4:${lib_support}"
+    testCompile 'junit:junit:4.12'
+    compile project(':library')
+    compile project(':goods')
+    compile project(':cart')
+    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
+    compile 'com.alibaba:arouter-api:1.2.4'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+
+}

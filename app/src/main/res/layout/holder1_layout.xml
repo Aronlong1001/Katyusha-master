@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <android.support.v4.view.ViewPager
+            android:id="@+id/bl_home_banner_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/bl_home_banner_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="bottom|center_horizontal"
+            >
+        </net.lucode.hackware.magicindicator.MagicIndicator>
+    </FrameLayout>
+</layout>
