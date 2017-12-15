@@ -27,8 +27,10 @@ public abstract class CommonSubscriber<T extends BaseResponse> extends Subscribe
 
     @Override
     public void onError(Throwable e) {
-        KLog.e(e.toString());
-        onFinalFailure(FailureType.NETWORK, null);
+        if (e != null) {
+            KLog.e(e.toString());
+            onFinalFailure(FailureType.NETWORK, null);
+        }
     }
 
     @Override

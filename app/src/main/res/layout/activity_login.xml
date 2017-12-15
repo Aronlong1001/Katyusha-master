@@ -46,5 +46,18 @@
             android:textColor="@android:color/white"
             android:text="进入首页"
             android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/to_kotlin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/bg_green_tv"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="Learn Kotlin"
+            android:textSize="16sp"/>
     </LinearLayout>
 </layout>

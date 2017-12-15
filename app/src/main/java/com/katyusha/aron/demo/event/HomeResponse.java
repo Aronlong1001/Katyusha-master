@@ -11,13 +11,4 @@ import java.util.List;
 
 public class HomeResponse extends BaseResponse<List<HomeBean>>{
 
-//    private List<HomeBean> data;
-//
-//    public List<HomeBean> getData() {
-//        return data;
-//    }
-//
-//    public void setData(List<HomeBean> data) {
-//        this.data = data;
-//    }
 }

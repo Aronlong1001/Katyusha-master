@@ -116,7 +116,7 @@ public class BLRequest {
 //                    builder.cache(cache);
 //                    builder.addNetworkInterceptor(new HttpCacheInterceptor(context));
 //                    builder.addInterceptor(new HttpParamsInterceptor());
-                    builder.addInterceptor(new StethoInterceptor());
+                    builder.addNetworkInterceptor(new StethoInterceptor());
 //                    if (BuildConfig.LOG) {
                         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 //                    } else {

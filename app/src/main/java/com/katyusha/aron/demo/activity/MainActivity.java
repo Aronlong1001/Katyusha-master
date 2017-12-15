@@ -11,12 +11,12 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.andview.refreshview.XRefreshView;
 import com.katyusha.aron.demo.R;
 import com.katyusha.aron.demo.adapter.BhRecycleAdapter;
-import com.katyusha.aron.demo.basic.BaseActivity;
 import com.katyusha.aron.demo.bean.HomeBean;
 import com.katyusha.aron.demo.databinding.ActivityMainBinding;
 import com.katyusha.aron.demo.event.BhClickEvent;
 import com.katyusha.aron.demo.event.HomeEvent;
 import com.katyusha.aron.demo.viewmodel.HomeVM;
+import com.katyusha.aron.library.basic.BaseActivity;
 import com.katyusha.aron.library.constant.PagePath;
 import com.katyusha.aron.library.widget.SmileyHeaderView;
 

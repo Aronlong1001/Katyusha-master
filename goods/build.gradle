@@ -40,7 +40,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    annotationProcessor "com.alibaba:arouter-compiler:${arouter_compile_version}"
     testCompile 'junit:junit:4.12'
     compile project(':library')
 }

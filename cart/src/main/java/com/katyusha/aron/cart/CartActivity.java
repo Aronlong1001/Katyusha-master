@@ -57,13 +57,7 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                TipActivity.launch(CartActivity.this);
                 ARouter.getInstance().build(PagePath.Tips).navigation(CartActivity.this, 1001);
-                BLToast.makeText(BaseApplication.getAppContext(), "jump to tips", BenLaiToast.LENGTH_SHORT).show();
-            }
-        });
-        binding.constraint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+                BLToast.makeText(BaseApplication.getAppContext(), "jump to tips", BLToast.LENGTH_SHORT).show();
             }
         });
     }
@@ -74,7 +68,7 @@ public class CartActivity extends AppCompatActivity {
 
         switch (requestCode){
             case 1001:
-                BLToast.makeText(CartActivity.this, "I come back!", BenLaiToast.LENGTH_SHORT).show();
+                BLToast.makeText(CartActivity.this, "I come back!", BLToast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

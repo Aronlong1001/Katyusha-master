@@ -11,5 +11,7 @@ public class Urls {
     public static final String LOGIN = "IAAcount/SysLogin";
 
     public static final String MSG_HOME = "IAMessage/GetMsgHome";
+
+    public static final String PRODUCT_LIST = "ISearch";
 }
 

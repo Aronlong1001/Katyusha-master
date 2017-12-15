@@ -64,8 +64,9 @@ dependencies {
     compile project(':library')
     compile project(':goods')
     compile project(':cart')
+    compile project(':kotlin')
     compile 'com.github.hackware1993:MagicIndicator:1.5.0'
-    compile 'com.alibaba:arouter-api:1.2.4'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    compile "com.alibaba:arouter-api:${arouter_api_version}"
+    annotationProcessor "com.alibaba:arouter-compiler:${arouter_compile_version}"
 
 }

@@ -10,7 +10,7 @@ public class PagePath {
     /**
      * 首页
      */
-   public static final String Main = "/app/MainActivity";
+    public static final String Main = "/app/MainActivity";
 
     /**
      * 登录页面
@@ -23,7 +23,7 @@ public class PagePath {
     public static final String Goods = "/goods/GoodsActivity";
 
     /**
-     *购物车
+     * 购物车
      */
     public static final String Cart = "/cart/CartActivity";
 
@@ -31,4 +31,13 @@ public class PagePath {
      * 购物车消息
      */
     public static final String Tips = "/cart/TipActivity";
+
+    /**
+     * kotlin
+     */
+    public static final String Kotlin = "/kotlin/KotlinActivity";
+    /**
+     *kotlinlist
+     */
+    public static final String KotlinList = "/kotlin/ProductListActivity";
 }

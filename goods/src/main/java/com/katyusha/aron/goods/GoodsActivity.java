@@ -51,7 +51,7 @@ public class GoodsActivity extends AppCompatActivity {
                 ARouter.getInstance().build(PagePath.Cart)
                         .withString("url", url)
                         .navigation();
-                BLToast.makeText(GoodsActivity.this,"jump to cart", BenLaiToast.LENGTH_SHORT).show();
+                BLToast.makeText(GoodsActivity.this,"jump to cart", BLToast.LENGTH_SHORT).show();
             }
         });
 

@@ -40,8 +40,8 @@ public class TipActivity extends AppCompatActivity {
         binding.weiboShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WbShareHandler handler = new WbShareHandler(TipActivity.this);
-                handler.registerApp();
+//                WbShareHandler handler = new WbShareHandler(TipActivity.this);
+//                handler.registerApp();
             }
         });
     }

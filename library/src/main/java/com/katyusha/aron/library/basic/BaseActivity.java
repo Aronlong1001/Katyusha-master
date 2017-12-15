@@ -1,11 +1,10 @@
-package com.katyusha.aron.demo.basic;
+package com.katyusha.aron.library.basic;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.katyusha.aron.library.model.BaseVM;
 import com.katyusha.aron.library.utils.BLToast;
-import com.katyusha.aron.library.utils.BenLaiToast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,7 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void showShortText(String text){
-        BLToast.makeText(BaseActivity.this, text, BenLaiToast.LENGTH_SHORT).show();
+        BLToast.makeText(BaseActivity.this, text, BLToast.LENGTH_SHORT).show();
     }
 
     @Override

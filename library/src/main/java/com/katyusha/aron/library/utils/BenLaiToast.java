@@ -1,116 +1,149 @@
 package com.katyusha.aron.library.utils;
 
 import android.content.Context;
-import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
-import android.view.Gravity;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Toast;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
- * Created by aron on 2017/8/1.
+ * Created by jixiaolong on 2017/8/1.
+ * 自定义Toast
  */
 
 public class BenLaiToast {
 
-    private WindowManager manger;
-    private Long time = Long.valueOf(2000L);
-    private static View contentView;
-    private WindowManager.LayoutParams params;
-    private static Timer timer;
-    private Toast toast;
-    private static Toast oldToast;
-    public static final int LENGTH_SHORT = 0;
-    public static final int LENGTH_LONG = 1;
-    private static Handler handler;
-    private CharSequence text;
+    private Handler handler;
 
-    public BenLaiToast(Context context, CharSequence text, int HIDE_DELAY) {
-        manger = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+    private Context mContext;
 
-        this.text = text;
+    private Object mObj;
+    private Method showMethod, hideMethod;
+    private android.widget.Toast mToast;
 
-        if(HIDE_DELAY == BenLaiToast.LENGTH_SHORT)
-            this.time = 2000L;
-        else if(HIDE_DELAY == BenLaiToast.LENGTH_LONG)
-            this.time = 3500L;
+    private String text = "Toast";
+    private int time = 2500;
 
-        if(oldToast == null){
-            toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            contentView = toast.getView();
+    private boolean hasReflectException = false;
 
-            params = new WindowManager.LayoutParams();
-            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-            params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-            params.format = PixelFormat.TRANSLUCENT;
-            params.windowAnimations = -1;
-            params.type = WindowManager.LayoutParams.TYPE_TOAST;
-            params.setTitle("BenLaiToast");
-            params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                    | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                    | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
-            params.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
-            params.y = 200;
+    private static BenLaiToast instance;
+
+    public static BenLaiToast makeText(Context context, String text, int delay) {
+        if (instance == null) {
+            instance = new BenLaiToast(context);
         }
-        if(handler == null){
-            handler = new Handler(){
+        instance.setDuration(delay);
+        instance.setText(text);
+        return instance;
+    }
+
+    public static BenLaiToast makeText(Context context, int resId, int delay) {
+        if (instance == null) {
+            instance = new BenLaiToast(context);
+        }
+        instance.setDuration(delay);
+        instance.setText(context.getResources().getString(resId));
+        return instance;
+    }
+
+    private BenLaiToast(Context context) {
+        if (context == null || context.getApplicationContext() == null) {
+            throw new NullPointerException("context can't be null");
+        }
+        this.mContext = context;
+        initTN();
+        if (handler == null) {
+            handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
-                    BenLaiToast.this.cancel();
+                    BenLaiToast.this.hideToast();
                 }
             };
         }
     }
 
-    public static BenLaiToast makeText(Context context, String text, int HIDE_DELAY) {
-        BenLaiToast toast = new BenLaiToast(context, text, HIDE_DELAY);
-        return toast;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public static BenLaiToast makeText(Context context, int resId, int HIDE_DELAY) {
-        return makeText(context, context.getText(resId).toString(), HIDE_DELAY);
+    public void setText(int resId) {
+        setText(mContext.getText(resId).toString());
     }
 
-    public void show() {
-        if(oldToast == null) {
-            oldToast = this.toast;
-            this.manger.addView(contentView, this.params);
-            timer = new Timer();
-        } else {
-            timer.cancel();
-            oldToast.setText(this.text);
+    public void setDuration(int t) {
+        if (t == android.widget.Toast.LENGTH_SHORT) {
+            this.time = 2500;
+        } else if (t == android.widget.Toast.LENGTH_LONG) {
+            this.time = 3500;
+        } else if (t > 1000) {
+            this.time = t;
         }
-
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                BenLaiToast.handler.sendEmptyMessage(1);
-            }
-        }, this.time.longValue());
     }
 
-    public void cancel() {
+    public final void show() {
+        if (!hasReflectException) {
+            mToast.setText(text);
+            showToast();
+            handler.removeMessages(1);
+            handler.sendEmptyMessageDelayed(1, time);
+        }
+    }
+
+    private void initTN() {
+        Field mTN;
+        if (mToast == null) {
+            mToast = android.widget.Toast.makeText(mContext, text, android.widget.Toast.LENGTH_SHORT);
+        }
+        Class<android.widget.Toast> clazz = android.widget.Toast.class;
         try {
-            this.manger.removeView(contentView);
-        } catch (IllegalArgumentException var2) {
-            ;
+            mTN = clazz.getDeclaredField("mTN");
+            mTN.setAccessible(true);
+            mObj = mTN.get(mToast);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                showMethod = mObj.getClass().getDeclaredMethod("show", IBinder.class);
+            } else {
+                showMethod = mObj.getClass().getDeclaredMethod("show", new Class<?>[0]);
+            }
+            hideMethod = mObj.getClass().getDeclaredMethod("hide", new Class<?>[0]);
+            Field mY = mObj.getClass().getDeclaredField("mY");
+            mY.setAccessible(true);
+            mY.set(mObj, dip2px(mContext, 68F));
+            hasReflectException = false;
+        } catch (Exception e) {
+            hasReflectException = true;
         }
-
-        timer.cancel();
-        oldToast.cancel();
-        timer = null;
-        this.toast = null;
-        oldToast = null;
-        contentView = null;
-        handler = null;
     }
 
-    public void setText(CharSequence s) {
-        this.toast.setText(s);
+    private void showToast() {
+        try {
+            Field mNextView = mObj.getClass().getDeclaredField("mNextView");
+            mNextView.setAccessible(true);
+            mNextView.set(mObj, mToast.getView());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                showMethod.invoke(mObj, new Object[1]);
+            } else {
+                showMethod.invoke(mObj, new Object[0]);
+            }
+            hasReflectException = false;
+        } catch (Exception e) {
+            hasReflectException = true;
+        }
+    }
+
+    public void hideToast() {
+        try {
+            hideMethod.invoke(mObj, new Object[0]);
+            hasReflectException = false;
+        } catch (Exception e) {
+            hasReflectException = true;
+        }
+    }
+
+    private int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }
