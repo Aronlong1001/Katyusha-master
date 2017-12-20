@@ -38,7 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         eventBus.unregister(this);
         if (viewModel !=null) {
-            viewModel.getCompositeSubscription().unsubscribe();
+            viewModel.getCompositeSubscription().dispose();
         }
     }
 }

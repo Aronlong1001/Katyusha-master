@@ -5,10 +5,10 @@ import com.katyusha.aron.library.constant.Urls;
 
 import java.util.Map;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-import rx.Observable;
 
 /**
  * Created by aron on 2017/6/13.

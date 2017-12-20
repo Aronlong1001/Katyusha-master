@@ -7,7 +7,7 @@
 
         <variable
             name="product"
-            type="com.katyusha.aron.kotlin.productlist.ProductListResponse" />
+            type="com.katyusha.aron.kotlin.productlist.ProductListResponse.ProductListBean" />
     </data>
 
     <android.support.constraint.ConstraintLayout

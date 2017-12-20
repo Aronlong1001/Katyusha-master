@@ -29,7 +29,7 @@ class ProductListActivity : AppCompatActivity(), ProductListContract {
     }
 
     private fun initRequest() {
-        var productVm = ProductListVm(this, this)
+        val productVm = ProductListVm(this, this)
         productVm.requestProductListData()
     }
 

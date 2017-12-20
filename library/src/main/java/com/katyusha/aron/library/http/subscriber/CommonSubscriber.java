@@ -4,25 +4,24 @@ import com.katyusha.aron.library.http.FailureType;
 import com.katyusha.aron.library.model.BaseResponse;
 import com.socks.library.KLog;
 
-import rx.Subscriber;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * Created by aron on 2017/10/10.
+ * 创建一个可被 CompositeDisposable 管理的 observer->DisposableObserver
  */
 
-public abstract class CommonSubscriber<T extends BaseResponse> extends Subscriber<T> {
-
+public abstract class CommonSubscriber<T extends BaseResponse> extends DisposableObserver<T> {
 
     public static final String ERROR_CODE = "0";
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onCompleted() {
-
+    public void onNext(T response) {
+        if (response.getError().equals(ERROR_CODE)) {
+            onSuccess(response);
+        } else {
+            onFinalFailure(FailureType.ABNORMAL, response);
+        }
     }
 
     @Override
@@ -34,14 +33,9 @@ public abstract class CommonSubscriber<T extends BaseResponse> extends Subscribe
     }
 
     @Override
-    public void onNext(T response) {
-        if (response.getError().equals(ERROR_CODE)) {
-            onSuccess(response);
-        } else {
-            onFinalFailure(FailureType.ABNORMAL, response);
-        }
-    }
+    public void onComplete() {
 
+    }
 
     public abstract void onSuccess(T response);
 

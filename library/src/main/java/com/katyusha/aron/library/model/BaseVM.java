@@ -7,11 +7,11 @@ import com.katyusha.aron.library.widget.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
-import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by aron on 2017/10/10.
@@ -20,7 +20,7 @@ import rx.subscriptions.CompositeSubscription;
 public class BaseVM {
 
     public Context context;
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeSubscription;
 
     private Dialog loadingDialog;
 
@@ -31,9 +31,9 @@ public class BaseVM {
     /**
      * @return
      */
-    public CompositeSubscription getCompositeSubscription() {
+    public CompositeDisposable getCompositeSubscription() {
         if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
+            this.mCompositeSubscription = new CompositeDisposable();
         }
 
         return this.mCompositeSubscription;
@@ -43,9 +43,9 @@ public class BaseVM {
     /**
      * @param s
      */
-    public void addSubscription(Subscription s) {
+    public void addSubscription(Disposable s) {
         if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
+            this.mCompositeSubscription = new CompositeDisposable();
         }
 
         this.mCompositeSubscription.add(s);

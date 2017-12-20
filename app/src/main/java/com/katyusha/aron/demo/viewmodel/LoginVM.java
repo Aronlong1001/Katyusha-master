@@ -15,8 +15,6 @@ import com.katyusha.aron.library.model.BaseVM;
 import com.google.gson.Gson;
 import com.socks.library.KLog;
 
-import rx.Subscription;
-
 
 /**
  * Created by aron on 2017/10/12.
@@ -57,7 +55,7 @@ public class LoginVM extends BaseVM {
         params.put("MD5PWD", md5Pwd);
         params.put("UserName", userName);
         params.put("AutoLogin", autoLogin);
-        Subscription subscribe = BLRequest.getInstance()
+        BLRequest.getInstance()
                 .setBaseUrl(Constant.BLGF_HOST)//如果baseurl不一致先设置baseurl
                 .createApi(BaseResponse.class)//必须设置返回数据的实体类
                 .get(Urls.LOGIN, params.urlParamsMap)
@@ -66,8 +64,8 @@ public class LoginVM extends BaseVM {
 //        LoginApiService service = BLRequest.getInstance()
 //                .setBaseUrl(Constant.BLGF_HOST)
 //                .create(LoginApiService.class);//自定义api接口
-//        Subscription subscribe = observe(service.getLogin(params.urlParamsMap)).subscribe(subscriber);//自定义api接口请求
-        addSubscription(subscribe);
+//        observe(service.getLogin(params.urlParamsMap)).subscribe(subscriber);//自定义api接口请求
+        addSubscription(subscriber);
     }
 
     public void requestMessage(){
@@ -87,7 +85,7 @@ public class LoginVM extends BaseVM {
                 dismissLoadingDialog();
             }
         };
-        Subscription subscribe = BLRequest.getInstance()
+        BLRequest.getInstance()
                 .setBaseUrl(Constant.BLGF_HOST)//如果baseurl不一致先设置baseurl
                 .createApi(MessageResponse.class)//必须设置返回数据的实体类
                 .get(Urls.MSG_HOME)
@@ -96,7 +94,7 @@ public class LoginVM extends BaseVM {
 //        MsgApiService service = BLRequest.getInstance()
 //                .setBaseUrl(Constant.BLGF_HOST)
 //                .create(MsgApiService.class);//自定义api接口
-//        Subscription subscribe = observe(service.getMessage()).subscribe(MsgSubscriber);//自定义api接口请求
-        addSubscription(subscribe);
+//        observe(service.getMessage()).subscribe(MsgSubscriber);//自定义api接口请求
+        addSubscription(MsgSubscriber);
     }
 }

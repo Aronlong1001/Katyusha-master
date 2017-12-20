@@ -1,1 +1,1 @@
-include ':app', ':library', ':goods', ':cart', ':kotlin'
+include ':app', ':library', ':goods', ':cart', ':kotlin', ':java'

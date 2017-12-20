@@ -18,15 +18,15 @@ import java.io.File;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Action;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.functions.Action0;
 
 /**
  * Created by aron on 2017/6/13.
@@ -60,7 +60,7 @@ public class BLRequest {
             baseUrl = Constant.BL_HOST;
         }
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getOkHttpClient()).build();
         return retrofit;
@@ -146,14 +146,15 @@ public class BLRequest {
     public Observable<BaseResponse> get(String url, Map<String, String> params) {
         return apiService.get(url, params).compose(new FlatTransformer(clz))
                 .compose(new SchedulersTransformer<BaseResponse>())
-                .doOnTerminate(new Action0() {
+                .doOnTerminate(new Action() {
                     @Override
-                    public void call() {
+                    public void run() throws Exception {
                         baseUrl = null;
                         clz = null;
                     }
                 });
     }
+
 
     /**
      * 不带参数的GET请求
@@ -163,9 +164,9 @@ public class BLRequest {
     public Observable<BaseResponse> get(String url) {
         return apiService.get(url).compose(new FlatTransformer(clz))
                 .compose(new SchedulersTransformer<BaseResponse>())
-                .doOnTerminate(new Action0() {
+                .doOnTerminate(new Action() {
                     @Override
-                    public void call() {
+                    public void run() throws Exception {
                         baseUrl = null;
                         clz = null;
                     }
@@ -182,9 +183,9 @@ public class BLRequest {
         return apiService.postJson(url, body)
                 .compose(new FlatTransformer(clz))
                 .compose(new SchedulersTransformer<BaseResponse>())
-                .doOnTerminate(new Action0() {
+                .doOnTerminate(new Action() {
                     @Override
-                    public void call() {
+                    public void run() throws Exception {
                         baseUrl = null;
                         clz = null;
                     }
@@ -201,9 +202,9 @@ public class BLRequest {
         return apiService.post(url, maps)
                 .compose(new FlatTransformer(clz))
                 .compose(new SchedulersTransformer<BaseResponse>())
-                .doOnTerminate(new Action0() {
+                .doOnTerminate(new Action() {
                     @Override
-                    public void call() {
+                    public void run() throws Exception {
                         baseUrl = null;
                         clz = null;
                     }

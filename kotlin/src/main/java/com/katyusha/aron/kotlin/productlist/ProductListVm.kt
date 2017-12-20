@@ -15,7 +15,7 @@ class ProductListVm(context: Context, val contract: ProductListContract) : BaseV
 
      fun requestProductListData() {
          showLoadingDialog()
-        var subscriber =object : CommonSubscriber<BaseResponse<*>>(){
+        val subscriber = object : CommonSubscriber<BaseResponse<*>>(){
             override fun onSuccess(response: BaseResponse<*>?) {
                 dismissLoadingDialog()
                var resp = response as ProductListResponse
@@ -37,10 +37,10 @@ class ProductListVm(context: Context, val contract: ProductListContract) : BaseV
         params.put("c2", "2452")
         params.put("c3", "2460")
 
-        var subscription = BLRequest.getInstance().createApi(ProductListResponse::class.java)
+        BLRequest.getInstance().createApi(ProductListResponse::class.java)
                 .get(Urls.PRODUCT_LIST, params.urlParamsMap)
                 .subscribe(subscriber)
-        addSubscription(subscription)
+        addSubscription(subscriber)
     }
 
 
