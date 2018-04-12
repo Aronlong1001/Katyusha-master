@@ -10,8 +10,11 @@
         <activity
             android:name=".productlist.ProductListActivity">
         </activity>
-        <activity android:name=".productdetail.ProductDetailActivity">
+        <activity android:name=".productdetail.activity.ProductDetailActivity">
         </activity>
+        <activity android:name=".practice.BizListActivity">
+        </activity>
+        <activity android:name=".practice.TableActivity"/>
     </application>
 
 </manifest>

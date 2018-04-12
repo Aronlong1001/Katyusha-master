@@ -1,16 +1,15 @@
-package com.katyusha.aron.kotlin.productdetail
-
-import com.katyusha.aron.library.model.BaseResponse
+package com.katyusha.aron.kotlin.productdetail.model
 import com.google.gson.annotations.SerializedName
 
 
 /**
- * Created by jixiaolong on 2017/12/15.
+ * Created by jixiaolong on 2018/1/4.
  */
-class ProductDetailResponse: BaseResponse<ProductDetailResponse.ProductDetailBean>() {
+class Response {
 
 
-data class ProductDetailBean(
+
+data class Bean(
 		@SerializedName("sysNo") var sysNo: Int, //57087
 		@SerializedName("productId") var productId: String, //P0000057087TC
 		@SerializedName("appImg") var appImg: List<String>,
@@ -30,7 +29,7 @@ data class ProductDetailBean(
 		@SerializedName("isFreeShip") var isFreeShip: Boolean, //true
 		@SerializedName("shipMsg") var shipMsg: String, //上海市满60.00元包邮
 		@SerializedName("isWish") var isWish: Boolean, //false
-		@SerializedName("newPromotions") var newPromotions: List<Any>,
+		@SerializedName("newPromotions") var newPromotions: List<NewPromotion>,
 		@SerializedName("tips") var tips: String,
 		@SerializedName("otherContentLinks") var otherContentLinks: List<OtherContentLink>,
 		@SerializedName("status") var status: Int, //1
@@ -40,7 +39,7 @@ data class ProductDetailBean(
 		@SerializedName("productLink") var productLink: String, //https://m.benlai.com/bj/product/57087
 		@SerializedName("productQRCodeUrl") var productQRCodeUrl: String, //https://m.benlai.com/bj/product/57087?Method=ScanQRCode
 		@SerializedName("applyRangeType") var applyRangeType: Int, //-999999
-		@SerializedName("shareImageUrl") var shareImageUrl: String, //https://image5.benlailife.com/ProductImages/000/000/057/087/medium/81e45552-5b01-4c0f-9462-aa4b14f2c480.jpg
+		@SerializedName("shareImageUrl") var shareImageUrl: String, //https://image4.benlailife.com/ProductImages/000/000/057/087/medium/81e45552-5b01-4c0f-9462-aa4b14f2c480.jpg
 		@SerializedName("cpsProduct") var cpsProduct: CpsProduct,
 		@SerializedName("presellTip") var presellTip: String,
 		@SerializedName("productBasicSysNo") var productBasicSysNo: Int, //722
@@ -59,7 +58,7 @@ data class ProductDetailBean(
 		@SerializedName("needSiteChangeMsg") var needSiteChangeMsg: Any, //null
 		@SerializedName("startSaleNumber") var startSaleNumber: Int, //1
 		@SerializedName("isEasyHome") var isEasyHome: Int, //0
-		@SerializedName("productTagList") var productTagList: List<ProductTagList>
+		@SerializedName("productTagList") var productTagList: List<Any>
 )
 
 data class ProductArea(
@@ -88,16 +87,20 @@ data class OtherContentLink(
 
 data class ProductPrice(
 		@SerializedName("hasOrigPrice") var hasOrigPrice: Boolean, //true
-		@SerializedName("price") var price: String, //69
+		@SerializedName("price") var price: String, //49
 		@SerializedName("priceName") var priceName: String, //促销价
 		@SerializedName("origPrice") var origPrice: String, //99.6
 		@SerializedName("origPriceName") var origPriceName: String //本来价
 )
 
-data class ProductTagList(
-		@SerializedName("tagType") var tagType: Int, //1
-		@SerializedName("tag") var tag: String, //https://image4.benlailife.com//Product/Tag/ef716b3a-1416-4724-996d-0117a020d8ae.jpg
-		@SerializedName("position") var position: Int //1
+data class NewPromotion(
+		@SerializedName("sysNo") var sysNo: Int, //232266
+		@SerializedName("promotionsType") var promotionsType: Int, //7
+		@SerializedName("promotionTypeName") var promotionTypeName: String, //换购
+		@SerializedName("promotionalLanguage") var promotionalLanguage: String, //购买水果满19元即可参与超值换购 部分商品除外
+		@SerializedName("appConditionList") var appConditionList: List<Any>,
+		@SerializedName("isLink") var isLink: Int, //1
+		@SerializedName("hasGift") var hasGift: Boolean //true
 )
 
 data class CpsProduct(
@@ -106,4 +109,5 @@ data class CpsProduct(
 		@SerializedName("content") var content: String,
 		@SerializedName("contentLink") var contentLink: String //http://m.benlai.com/earn/myEarn
 )
+
 }

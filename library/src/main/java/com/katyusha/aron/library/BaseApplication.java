@@ -2,6 +2,7 @@ package com.katyusha.aron.library;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -9,6 +10,7 @@ import com.facebook.stetho.Stetho;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
+import com.tencent.smtt.sdk.QbSdk;
 
 
 /**
@@ -30,6 +32,7 @@ public class BaseApplication extends Application{
         super.onCreate();
         Stetho.initializeWithDefaults(this);
         initARouter();
+        initX5WebView();
         Fresco.initialize(this);
         sAppContext = this;
 //        SophixManager.getInstance().queryAndLoadNewPatch();
@@ -74,5 +77,25 @@ public class BaseApplication extends Application{
             ARouter.openDebug();
 //        }
         ARouter.init(this);
+    }
+
+    private void initX5WebView() {
+        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
+
+            @Override
+            public void onViewInitFinished(boolean arg0) {
+                // TODO Auto-generated method stub
+                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
+                Log.d("app", " onViewInitFinished is " + arg0);
+            }
+
+            @Override
+            public void onCoreInitFinished() {
+                // TODO Auto-generated method stub
+            }
+        };
+        //x5内核初始化接口
+        QbSdk.initX5Environment(getApplicationContext(),  cb);
+        Log.e("jixiaolong", getApplicationContext() + "");
     }
 }

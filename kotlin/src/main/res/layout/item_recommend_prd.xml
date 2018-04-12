@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="product"
+            type="com.katyusha.aron.kotlin.productdetail.model.RecommendPrdResponse.RecommendPrdBean" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="110dp"
+        android:layout_height="180dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/iv_recd_prd"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            app:recdImageUrl="@{product.imageUrl}"/>
+
+        <TextView
+            android:id="@+id/recd_prd_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/iv_recd_prd"
+            android:textColor="@color/color_gray_dark"
+            android:text="@{product.productName}"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/recd_prd_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/recd_prd_name"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/bl_color_orange"
+            android:text='@{@string/ren_min_bi + product.price.price}'/>
+        
+        <ImageView
+            android:id="@+id/iv_recd_cart"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/cart_normal"
+            app:layout_constraintTop_toTopOf="@+id/recd_prd_price"
+            app:layout_constraintEnd_toEndOf="@+id/iv_recd_prd"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>

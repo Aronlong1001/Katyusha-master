@@ -7,5 +7,5 @@ import com.katyusha.aron.library.model.ErrorInfo
  */
 interface ProductListContract {
     fun onSuccess(response: ProductListResponse)
-    fun onFailure(errorInfo: ErrorInfo)
+    fun onFailure(errorInfo: ErrorInfo?)
 }

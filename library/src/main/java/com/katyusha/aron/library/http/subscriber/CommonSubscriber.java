@@ -1,5 +1,7 @@
 package com.katyusha.aron.library.http.subscriber;
 
+import android.util.Log;
+
 import com.katyusha.aron.library.http.FailureType;
 import com.katyusha.aron.library.model.BaseResponse;
 import com.socks.library.KLog;
@@ -13,6 +15,7 @@ import io.reactivex.observers.DisposableObserver;
 
 public abstract class CommonSubscriber<T extends BaseResponse> extends DisposableObserver<T> {
 
+    private final String TAG = this.getClass().getSimpleName();
     public static final String ERROR_CODE = "0";
 
     @Override
@@ -27,7 +30,7 @@ public abstract class CommonSubscriber<T extends BaseResponse> extends Disposabl
     @Override
     public void onError(Throwable e) {
         if (e != null) {
-            KLog.e(e.toString());
+            Log.e(TAG, e.toString());
             onFinalFailure(FailureType.NETWORK, null);
         }
     }

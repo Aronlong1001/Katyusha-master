@@ -15,5 +15,7 @@ public class Urls {
     public static final String PRODUCT_LIST = "ISearch";
 
     public static final String PRODUCT_DETAIL = "IProduct/ProductDetailNew";
+
+    public static final String RECOMMEND_PRODUCT = "IProduct/RecommendProductList";
 }
 

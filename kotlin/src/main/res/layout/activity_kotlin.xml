@@ -115,7 +115,7 @@
             android:layout_height="50dp"
             android:background="@android:color/darker_gray"
             android:gravity="center"
-            android:text="商品列表页"
+            android:text="商品页"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +126,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginBottom="52dp"
-            android:text="TextView10"
+            android:text="Tab+Fragment"
             android:gravity="center"
             android:layout_marginRight="5dp"
             android:textColor="@android:color/white"
@@ -138,7 +138,7 @@
             android:id="@+id/textView11"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="TextView11"
+            android:text="Table"
             android:gravity="center"
             android:layout_marginLeft="5dp"
             android:textColor="@android:color/white"
@@ -179,7 +179,6 @@
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="@+id/textView"
             app:layout_constraintRight_toRightOf="parent"/>
-
 
     </android.support.constraint.ConstraintLayout>
 </layout>

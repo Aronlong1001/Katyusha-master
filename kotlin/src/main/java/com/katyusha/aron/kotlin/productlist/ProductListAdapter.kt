@@ -12,26 +12,31 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.katyusha.aron.kotlin.R
 import com.katyusha.aron.kotlin.databinding.ItemPrdListBinding
+import com.katyusha.aron.library.utils.GlideLoader
 
 /**
- * Created by jixiaolong on 2017/12/14.
- */
-class ProductListAdapter(context: Context, dataList: ArrayList<ProductListResponse.ProductListBean>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+* Created by jixiaolong on 2017/12/14.
+*/
+class ProductListAdapter(context: Context, dataList: ArrayList<ProductListResponse.ProductListBean>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     private val listData : ArrayList<ProductListResponse.ProductListBean> =dataList
     private val mContext : Context =context
+    private lateinit var mListener: OnItemClickListener
 
     override fun getItemCount(): Int {
         return  listData.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        return ProductListHolder(LayoutInflater.from(mContext).inflate(R.layout.item_prd_list, parent, false))
+        var view = LayoutInflater.from(mContext).inflate(R.layout.item_prd_list, parent, false)
+        view.setOnClickListener(this)
+        return ProductListHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         val mHolder = holder as ProductListHolder
         mHolder.bind(listData[position])
+        mHolder.itemView.tag = position
     }
 
     class ProductListHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
@@ -43,11 +48,23 @@ class ProductListAdapter(context: Context, dataList: ArrayList<ProductListRespon
             textPaint.flags = Paint.STRIKE_THRU_TEXT_FLAG or textPaint.flags
         }
     }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        this.mListener = listener
+    }
+    override fun onClick(view: View) {
+        mListener.onItemClick(view, view.tag as Int)
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(view: View, position: Int)
+    }
+
     companion object {
         @JvmStatic
         @BindingAdapter("app:imageUrl")
         fun loadImage(imageView: ImageView, url : String) {
-            Glide.with(imageView.context).load(url).into(imageView)
+            GlideLoader.loadImage(imageView.context,url,imageView)
         }
     }
 

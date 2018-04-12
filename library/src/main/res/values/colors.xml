@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="refresh_header">#FF6F6F</color>
+    <color name="bl_color_green">#abd13e</color>
+    <color name="bl_color_orange">#ff9600</color>
+    <color name="bl_color_gray2">#999999</color>
+    <color name="bl_color_light_gray">#dddddd</color>
+    <color name="bl_color_white">#ffffff</color>
 </resources>

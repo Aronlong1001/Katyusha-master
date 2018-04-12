@@ -2,6 +2,7 @@ package com.katyusha.aron.kotlin.productlist
 
 import android.content.Context
 import com.katyusha.aron.library.constant.Urls
+import com.katyusha.aron.library.http.FailureType
 import com.katyusha.aron.library.http.HttpParams
 import com.katyusha.aron.library.http.request.BLRequest
 import com.katyusha.aron.library.http.subscriber.CommonSubscriber
@@ -22,9 +23,13 @@ class ProductListVm(context: Context, val contract: ProductListContract) : BaseV
                 contract.onSuccess(resp)
             }
 
-            override fun onFailure(type: Int, response: BaseResponse<*>) {
+            override fun onFailure(type: Int, response: BaseResponse<*>?) {
                 dismissLoadingDialog()
-                contract.onFailure(response.errorInfo)
+                if (type == FailureType.ABNORMAL) {
+                    contract.onFailure(response?.errorInfo)
+                } else if (type == FailureType.NETWORK) {
+                    contract.onFailure(null)
+                }
             }
         }
 

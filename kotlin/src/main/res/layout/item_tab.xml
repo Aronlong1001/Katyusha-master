@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tab_detail"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="图文详情"
+            android:textColor="@color/bl_color_green"
+            app:layout_constraintEnd_toStartOf="@+id/tab_params"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="45dp"
+            android:background="@color/color_gray"
+            app:layout_constraintStart_toEndOf="@+id/tab_detail" />
+
+        <TextView
+            android:id="@+id/tab_params"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="规格参数"
+            android:textColor="@color/bl_color_gray2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tab_detail" />
+
+        <View
+            android:id="@+id/tab_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_gray"
+            app:layout_constraintTop_toBottomOf="@+id/tab_detail" />
+
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/tab_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        </FrameLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

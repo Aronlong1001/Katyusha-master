@@ -6,4 +6,6 @@
 
     <color name="color_search_bg">#5adddddd</color>
     <color name="color_gray">#bbbbbb</color>
+    <color name="bg_grey">#efeff4</color>
+    <color name="color_gray_dark">#333333</color>
 </resources>

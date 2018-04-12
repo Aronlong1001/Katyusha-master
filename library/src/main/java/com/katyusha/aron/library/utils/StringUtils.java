@@ -1,10 +1,16 @@
 package com.katyusha.aron.library.utils;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
+
+import com.katyusha.aron.library.BaseApplication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -240,4 +246,52 @@ public class StringUtils {
 		return (byte) "0123456789ABCDEF".indexOf(ch);
 	}
 
+	public static CharSequence priceSpannable(String price, String format, boolean isFormatStart) {
+		try {
+			if (TextUtils.isEmpty(price)) {
+				return "";
+			}
+
+			String[] splitStr = price.split("\\.");
+			int formatLength = format.length();
+			if (splitStr.length != 2) {
+				SpannableStringBuilder builder = new SpannableStringBuilder();
+				SpannableString spannableFormat = new SpannableString(format);
+				Context context = BaseApplication.getAppContext();
+				SpannableString spannablePrice = new SpannableString(price);
+
+				spannableFormat.setSpan(new AbsoluteSizeSpan(DensityUtil.dip2px(context, 12)), 0, formatLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				builder.append(spannableFormat);
+				builder.append(spannablePrice);
+				return builder;
+			} else {
+				int leftIndex = price.indexOf(splitStr[0]);
+				int leftLength = splitStr[0].length();
+				int totalLength = price.length();
+				//flag为包含start，不包含end
+				SpannableStringBuilder builder = new SpannableStringBuilder();
+
+				SpannableString spannableFormat = new SpannableString(format);
+				Context context = BaseApplication.getAppContext();
+				spannableFormat.setSpan(new AbsoluteSizeSpan(DensityUtil.dip2px(context, 12)), 0, formatLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
+				SpannableString spannablePrice = new SpannableString(price);
+				spannablePrice.setSpan(new AbsoluteSizeSpan(DensityUtil.dip2px(context, 18)), leftIndex, leftLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+				spannablePrice.setSpan(new AbsoluteSizeSpan(DensityUtil.dip2px(context, 12)), leftLength, totalLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
+				if (isFormatStart) {
+					builder.append(spannableFormat);
+					builder.append(spannablePrice);
+					return builder;
+				} else {
+					builder.append(spannablePrice);
+					builder.append(spannableFormat);
+					return builder;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 }

@@ -37,7 +37,13 @@ public class PagePath {
      */
     public static final String Kotlin = "/kotlin/KotlinActivity";
     /**
-     *kotlinlist
+     *商品列表页
      */
-    public static final String KotlinList = "/kotlin/ProductListActivity";
+    public static final String ProductList = "/kotlin/ProductListActivity";
+    /**
+     * 商品详情页
+     */
+    public static final String ProductDetail = "/kotlin/ProductDetailActivity";
+
+    public static final String BIZ_LIST = "/kotlin/BizListActivity";
 }

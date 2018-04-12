@@ -5,6 +5,7 @@
 
     <data>
 
+        <import type="com.katyusha.aron.library.utils.StringUtils"/>
         <variable
             name="product"
             type="com.katyusha.aron.kotlin.productlist.ProductListResponse.ProductListBean" />
@@ -59,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="￥"
+            android:text="@string/ren_min_bi"
             android:textColor="@android:color/holo_red_light"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/tv_product_name"
@@ -81,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="@{`￥`+product.price.origPrice}"
+            android:text="@{@string/ren_min_bi+product.price.origPrice}"
             android:textColor="@color/color_gray"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_product_price_signal"
