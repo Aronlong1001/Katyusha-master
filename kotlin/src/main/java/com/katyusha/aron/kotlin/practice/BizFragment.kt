@@ -27,7 +27,7 @@ class BizFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_item_biz, null)
-        binding = DataBindingUtil.bind(rootView)
+        binding = DataBindingUtil.bind(rootView)!!
         init()
         return rootView
     }
@@ -35,7 +35,7 @@ class BizFragment: Fragment() {
     //执行顺序高于生命周期
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         if (arguments != null) {
-            type = arguments.getString("type")
+            type = arguments!!.getString("type")
         }
         if (isVisibleToUser) {
             initData()
@@ -60,7 +60,7 @@ class BizFragment: Fragment() {
         binding.rcvBiz.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
         binding.rcvBiz.layoutManager = manager
 
-        adapter = BizListAdapter(activity, dataList)
+        adapter = BizListAdapter(activity!!, dataList)
         binding.rcvBiz.adapter = adapter
 
         binding.tabChild.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

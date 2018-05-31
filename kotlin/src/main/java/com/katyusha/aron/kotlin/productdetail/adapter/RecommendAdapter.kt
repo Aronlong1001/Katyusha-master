@@ -23,19 +23,19 @@ class RecommendAdapter(var context: Context, private var dataList: ArrayList<Rec
         return dataList.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         var view = LayoutInflater.from(context).inflate(R.layout.item_recommend_prd, parent, false)
         return RecommendHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         var mHolder = holder as RecommendHolder
         mHolder.bind(dataList[position])
     }
 
     class RecommendHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        val binding: ItemRecommendPrdBinding = DataBindingUtil.bind(itemView)
+        val binding: ItemRecommendPrdBinding = DataBindingUtil.bind(itemView)!!
         fun bind(bean: RecommendPrdResponse.RecommendPrdBean) {
             binding.product = bean
         }

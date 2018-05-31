@@ -27,20 +27,20 @@ class ProductListAdapter(context: Context, dataList: ArrayList<ProductListRespon
         return  listData.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         var view = LayoutInflater.from(mContext).inflate(R.layout.item_prd_list, parent, false)
         view.setOnClickListener(this)
         return ProductListHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val mHolder = holder as ProductListHolder
         mHolder.bind(listData[position])
         mHolder.itemView.tag = position
     }
 
-    class ProductListHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        val binding : ItemPrdListBinding = DataBindingUtil.bind(itemView)
+    class ProductListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val binding : ItemPrdListBinding = DataBindingUtil.bind(itemView)!!
 
         fun bind(productListBean: ProductListResponse.ProductListBean) {
             binding.product = productListBean

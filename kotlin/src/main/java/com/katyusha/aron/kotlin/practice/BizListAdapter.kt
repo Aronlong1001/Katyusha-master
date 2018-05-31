@@ -18,18 +18,18 @@ class BizListAdapter(var context: Context, private var dataList: ArrayList<Strin
         return dataList.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         var viewHolder = holder as BizListHolder
         viewHolder.bind(dataList[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         var view = LayoutInflater.from(context).inflate(R.layout.item_biz_list, parent, false)
         return BizListHolder(view)
     }
 
     class BizListHolder(view: View): RecyclerView.ViewHolder(view) {
-        var binding : ItemBizListBinding = DataBindingUtil.bind(view)
+        var binding : ItemBizListBinding = DataBindingUtil.bind(view)!!
 
         fun bind(data : String) {
             binding.tvBiz.text = data

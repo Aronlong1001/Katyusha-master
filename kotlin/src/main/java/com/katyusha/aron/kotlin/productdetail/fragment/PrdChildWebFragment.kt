@@ -19,20 +19,22 @@ class PrdChildWebFragment:Fragment() {
     private var url:String?=null
     private var from: Int = 0
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater?.inflate(R.layout.fragment_item_detail_web, null)
-        binding = DataBindingUtil.bind(view)
+        binding = DataBindingUtil.bind(view)!!
         initData()
         initWebView()
         return view
     }
 
     private fun initData() {
-        from = arguments.getInt("from")
-        url = if (from == 1) {
-            (this.parentFragment as ProductDetailFragment).getDetailUrl()
-        }else{
-            (this.parentFragment as ProductInfoFragment).getDetailUrl()
+        if (arguments != null) {
+            from = arguments!!.getInt("from")
+            url = if (from == 1) {
+                (this.parentFragment as ProductDetailFragment).getDetailUrl()
+            } else {
+                (this.parentFragment as ProductInfoFragment).getDetailUrl()
+            }
         }
     }
 

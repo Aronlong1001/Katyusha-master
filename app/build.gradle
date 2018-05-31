@@ -4,7 +4,6 @@ apply plugin: 'walle'
 
 android {
     compileSdkVersion Integer.parseInt(compile_version)
-    buildToolsVersion build_version
     defaultConfig {
         applicationId "com.katyusha.aron.demo"
         minSdkVersion Integer.parseInt(min_version)
@@ -17,9 +16,9 @@ android {
                 arguments = [ moduleName : project.getName() ]
             }
         }
-        ndk {
-            abiFilters "armeabi", "armeabi-v7a"
-        }
+//        ndk {
+//            abiFilters "armeabi", "armeabi-v7a"
+//        }
     }
     signingConfigs {//签名配置
         release {//发布版签名配置
@@ -105,15 +104,15 @@ repositories {
     }
 }
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:support-v4:${lib_support}"
-    testCompile 'junit:junit:4.12'
-    compile project(':library')
-    compile project(':goods')
-    compile project(':cart')
-    compile project(':kotlin')
-    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
-    compile "com.alibaba:arouter-api:${arouter_api_version}"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:support-v4:${lib_support}"
+    testImplementation 'junit:junit:4.12'
+    implementation project(':library')
+    implementation project(':goods')
+    implementation project(':cart')
+    implementation project(':kotlin')
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+    implementation "com.alibaba:arouter-api:${arouter_api_version}"
     annotationProcessor "com.alibaba:arouter-compiler:${arouter_compile_version}"
 //    api 'com.google.protobuf:protobuf-java:3.5.1'
 //    api 'com.google.protobuf:protoc:3.5.1'

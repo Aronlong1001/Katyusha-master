@@ -20,14 +20,16 @@ class PrdConfigFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_item_config, null)
-        binding = DataBindingUtil.bind(view)
+        binding = DataBindingUtil.bind(view)!!
         initData()
         initWebView()
         return view
     }
 
     private fun initData() {
-        from = arguments.getInt("from")
+        if (arguments != null) {
+            from = arguments!!.getInt("from")
+        }
         url = if (from == 1) {
             (this.parentFragment as ProductDetailFragment).getConfigUrl()
         }else {

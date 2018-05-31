@@ -24,6 +24,9 @@ public class BaseVM {
 
     private Dialog loadingDialog;
 
+    /**
+     * @param context
+     */
     public BaseVM(Context context) {
         this.context = context;
     }
